@@ -1,7 +1,7 @@
 # Go-prom
 ## Getting started
 
-Fork the _Go-prom_ repo and:
+Fork [the Go-prom repo](https://github.com/cosckoya/go-prom) and:
 
 ```sh
   $ git clone git@github.com:my-github-user/go-prom.git
