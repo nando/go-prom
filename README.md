@@ -8,5 +8,6 @@ Fork the _Go-prom_ repo and:
   $ cd go-prom
   $ docker build -t my-github-user/go-prom .
   $ docker run -p80:2112 my-github-user/go-prom
+```
 
 At this point Prometheus should be serving metrics at **http://localhost/metrics**.
