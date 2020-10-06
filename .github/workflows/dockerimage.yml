@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Log in DockerHub
-      run: echo "${{ secrets.dockerhub }}" | docker login https://index.docker.io/v1/ -u ${{ github.actor }} --password-stdin      
+      run: echo "${{ secrets.DOCKERHUB }}" | docker login https://index.docker.io/v1/ -u ${{ github.actor }} --password-stdin      
     - name: Build the Docker image
       run: docker build . --tag cosckoya/go-prometheus:${GITHUB_SHA::8}
     - name: Image tag also as latest
