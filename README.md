@@ -25,6 +25,10 @@ This repo will be public, collaborative to anyone who wants to write some code j
 ## How to make it run:
 
 ### Local Docker standalone
+=======
+# Go-prom
+## Getting started
+
 Fork [the Go-prom repo](https://github.com/cosckoya/go-prom) and:
 
 ```sh
