@@ -46,7 +46,26 @@ And you will be able to see some Prometheus metrics
 
 ### Local Docker + Prometheus
 
-TBD: This will have some nice docker-compose file with a local container image and a Prometheus server, maybe a Grafana too :D
+Now it's time to make thing more complex. Let's try to start a Prometheus+Grafana to see some dashboards with our desired metrics.
+
+First you will need to install [docker-compose](https://github.com/docker/compose), configure it will be fine too :P
+
+Then run the following commands:
+```bash
+$> docker-compose build
+$> docker-compose up
+```
+At this point you will be able to navitage into [Prometheus](http://localhost:9090) and [Grafana](http://localhost:3000) (grafana login: admin/eatme)
+
+As you could see there is a dashboard with some basic Go metrics!
+
+Ps. To clean this mess you should run the following commands:
+```bash
+$> docker-compose stop
+$> docker-compose rm
+$> docker volume rm go-prom_grafana_data go-prom_prometheus_data
+```
+Enjoy!
 
 ### Local Kubernetes (Kind sample)
 

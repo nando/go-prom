@@ -1,0 +1,12 @@
+# Prometheus Config
+global:
+  scrape_interval:     15s
+
+  external_labels:
+    project: "go-prom"
+
+scrape_configs:
+  - job_name: 'go-prom'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['go-prom:2112']
