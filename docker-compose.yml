@@ -1,0 +1,48 @@
+version: '3.8'
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+
+services:
+  go-prom:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    image: go-prom
+    container_name: go-prom
+    ports:
+      - 80:2112
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    restart: always
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=7d'
+    ports:
+      - 9090:9090
+    links:
+      - go-prom:go-prom
+    depends_on:
+      - go-prom
+
+  grafana:
+    image: grafana/grafana
+    restart: always
+    user: "472"
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./config/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./config/grafana.env
