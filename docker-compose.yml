@@ -46,3 +46,12 @@ services:
       - ./config/provisioning/:/etc/grafana/provisioning/
     env_file:
       - ./config/grafana.env
+
+  http-server:
+    build:
+      context: ./http-server/
+    restart: always
+    image: http-server
+    container_name: http-server
+    ports:
+      - 8080:8080
