@@ -18,15 +18,15 @@ func recordMetrics() {
     go func() {
         for {
             opsProcessed.Inc()
-            time.Sleep(2 * time.Second)
+            time.Sleep(1 * time.Second)
         }
     }()
 }
 
 var (
     opsProcessed = promauto.NewCounter(prometheus.CounterOpts{
-        Name: "myapp_processed_ops_total",
-        Help: "The total number of processed events",
+        Name: "kittens_http_server_seconds_up",
+        Help: "Number of seconds the HTTP server has been serving kittens' webpage",
     })
 )
 
