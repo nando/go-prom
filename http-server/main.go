@@ -2,12 +2,33 @@ package main
 
 import (
     "net/http"
-		"html/template"
+    "html/template"
+    "time"
+
+    "github.com/prometheus/client_golang/prometheus"
+    "github.com/prometheus/client_golang/prometheus/promauto"
+    "github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 type KittensPageData struct {
-    KittensPageTitle string
+		KittensPageTitle string
 }
+
+func recordMetrics() {
+    go func() {
+        for {
+            opsProcessed.Inc()
+            time.Sleep(2 * time.Second)
+        }
+    }()
+}
+
+var (
+    opsProcessed = promauto.NewCounter(prometheus.CounterOpts{
+        Name: "myapp_processed_ops_total",
+        Help: "The total number of processed events",
+    })
+)
 
 func main() {
     tmpl := template.Must(template.ParseFiles("template.html"))
@@ -21,6 +42,9 @@ func main() {
 
     fs := http.FileServer(http.Dir("img/"))
     http.Handle("/img/", http.StripPrefix("/img/", fs))
+
+    recordMetrics()
+    http.Handle("/metrics", promhttp.Handler())
 
     http.ListenAndServe(":8080", nil)
 }
