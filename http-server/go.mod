@@ -1,5 +1,8 @@
 module github.com/cosckoya/go-prom/http-server
 
-go 1.13
+require (
+    github.com/urfave/negroni v0.3.0
+    github.com/prometheus/client_golang v1.7.1
+)
 
-require github.com/prometheus/client_golang v1.7.1
+go 1.13
