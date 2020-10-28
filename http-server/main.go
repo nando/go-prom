@@ -1,9 +1,10 @@
 package main
 
 import (
-    "net/http"
-    "html/template"
-    "time"
+	"html/template"
+	"log"
+	"net/http"
+	"time"
 
     "github.com/prometheus/client_golang/prometheus"
     "github.com/prometheus/client_golang/prometheus/promauto"
