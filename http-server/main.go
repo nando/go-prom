@@ -18,7 +18,7 @@ type KittensPageData struct {
 }
 
 var (
-    HttpServerSecondsUp = promauto.NewCounter(prometheus.CounterOpts{
+    httpServerSecondsUp = promauto.NewCounter(prometheus.CounterOpts{
         Namespace: "http",
         Name: "kittens_server_up",
         Help: "Number of seconds this HTTP server has been serving kittens' webpage",
@@ -35,7 +35,7 @@ var (
 func recordMetrics() {
     go func() {
         for {
-            HttpServerSecondsUp.Inc()
+            httpServerSecondsUp.Inc()
             time.Sleep(1 * time.Second)
         }
     }()
